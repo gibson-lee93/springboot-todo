@@ -6,7 +6,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Data
-public class SignUpDto {
+public class UserCredentialsDto {
 
     @NotEmpty
     @Size(min = 4, message = "username should have at least 4 characters")

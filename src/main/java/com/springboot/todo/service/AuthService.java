@@ -1,7 +1,9 @@
 package com.springboot.todo.service;
 
-import com.springboot.todo.payload.SignUpDto;
+import com.springboot.todo.payload.UserCredentialsDto;
 
 public interface AuthService {
-    void registerUser(SignUpDto signUpDto);
+    void registerUser(UserCredentialsDto userCredentialsDto);
+
+    String authenticateUser(UserCredentialsDto userCredentialsDto);
 }
