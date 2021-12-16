@@ -36,4 +36,12 @@ public class TodoController {
     ) {
         return todoService.getAllTodos(pageNo, pageSize);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Todo> updateTodo(
+            @RequestBody TodoDto todoDto,
+            @PathVariable(value = "id") Long id
+    ) {
+        return ResponseEntity.ok(todoService.updateTodo(todoDto, id));
+    }
 }
