@@ -12,4 +12,6 @@ public interface TodoService {
     TodoResponse getAllTodos(int pageNo, int pageSize);
 
     Todo updateTodo(TodoDto todoDto, Long id);
+
+    void deleteTodo(Long id);
 }
