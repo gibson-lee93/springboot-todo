@@ -1,6 +1,7 @@
 package com.springboot.todo.service.impl;
 
 import com.springboot.todo.entity.Todo;
+import com.springboot.todo.exception.ResourceNotFoundException;
 import com.springboot.todo.payload.TodoDto;
 import com.springboot.todo.repository.TodoRepository;
 import com.springboot.todo.service.TodoService;
@@ -21,10 +22,14 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public TodoDto createTodo(TodoDto todoDto) {
+    public Todo createTodo(TodoDto todoDto) {
         Todo todo = mapToEntity(todoDto);
-        Todo newTodo = todoRepository.save(todo);
-        return mapToDto(newTodo);
+        return todoRepository.save(todo);
+    }
+
+    @Override
+    public Todo getTodoById(Long id) {
+        return todoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Todo", "id", id));
     }
 
     private TodoDto mapToDto(Todo todo) {
