@@ -55,6 +55,16 @@ public class TodoServiceImpl implements TodoService {
         return todoResponse;
     }
 
+    @Override
+    public Todo updateTodo(TodoDto todoDto, Long id) {
+        Todo todo = getTodoById(id);
+
+        todo.setTitle(todoDto.getTitle());
+        todo.setDescription(todoDto.getDescription());
+
+        return todoRepository.save(todo);
+    }
+
     private TodoDto mapToDto(Todo todo) {
         return mapper.map(todo, TodoDto.class);
     }

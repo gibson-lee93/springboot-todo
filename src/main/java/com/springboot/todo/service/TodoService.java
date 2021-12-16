@@ -10,4 +10,6 @@ public interface TodoService {
     Todo getTodoById(Long id);
 
     TodoResponse getAllTodos(int pageNo, int pageSize);
+
+    Todo updateTodo(TodoDto todoDto, Long id);
 }
