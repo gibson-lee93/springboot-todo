@@ -1,17 +1,17 @@
 package com.springboot.todo.service;
 
-import com.springboot.todo.entity.Todo;
+import com.springboot.todo.entity.User;
 import com.springboot.todo.payload.TodoDto;
 import com.springboot.todo.payload.TodoResponse;
 
 public interface TodoService {
-    Todo createTodo(TodoDto todoDto);
+    TodoDto createTodo(TodoDto todoDto, User user);
 
-    Todo getTodoById(Long id);
+    TodoDto getTodoById(Long id, User user);
 
-    TodoResponse getAllTodos(int pageNo, int pageSize);
+    TodoResponse getAllTodos(int pageNo, int pageSize, User user);
 
-    Todo updateTodo(TodoDto todoDto, Long id);
+    TodoDto updateTodo(TodoDto todoDto, Long id, User user);
 
-    void deleteTodo(Long id);
+    void deleteTodo(Long id, User user);
 }
