@@ -54,7 +54,7 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public TodoResponse getAllTodos(int pageNo, int pageSize, User user) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<Todo> todos = todoRepository.findAll(pageable);
+        Page<Todo> todos = todoRepository.findByUserId(user.getId(), pageable);
         List<Todo> listOfTodos = todos.getContent();
         List<TodoDto> content = listOfTodos.stream().map((post) -> mapToDto(post)).collect(Collectors.toList());
 
