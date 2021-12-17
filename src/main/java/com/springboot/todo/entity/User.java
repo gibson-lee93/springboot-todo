@@ -6,9 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Getter
@@ -28,6 +26,9 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Todo> todos = new HashSet<>();
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
