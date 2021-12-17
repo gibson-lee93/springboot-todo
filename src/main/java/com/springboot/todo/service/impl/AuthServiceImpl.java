@@ -41,7 +41,11 @@ public class AuthServiceImpl implements AuthService {
         user.setUsername(userCredentialsDto.getUsername());
         user.setPassword(passwordEncoder.encode(userCredentialsDto.getPassword()));
 
-        userRepository.save(user);
+        try {
+            userRepository.save(user);
+        } catch (Exception exception) {
+            throw new TodoAPIException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error");
+        }
     }
 
     @Override

@@ -34,7 +34,12 @@ public class TodoServiceImpl implements TodoService {
     public TodoDto createTodo(TodoDto todoDto, User user) {
         Todo todo = mapToEntity(todoDto);
         todo.setUser(user);
-        return mapToDto(todoRepository.save(todo));
+
+        try {
+            return mapToDto(todoRepository.save(todo));
+        } catch (Exception exception) {
+            throw new TodoAPIException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error");
+        }
     }
 
     @Override
@@ -72,13 +77,22 @@ public class TodoServiceImpl implements TodoService {
         todo.setDescription(todoDto.getDescription());
         todo.setUser(user);
 
-        return mapToDto(todoRepository.save(todo));
+        try {
+            return mapToDto(todoRepository.save(todo));
+        } catch (Exception exception) {
+            throw new TodoAPIException(HttpStatus.NOT_FOUND, "Can't find todo with id: " + id);
+        }
     }
 
     @Override
     public void deleteTodo(Long id, User user) {
         Todo todo = mapToEntity(getTodoById(id, user));
-        todoRepository.delete(todo);
+
+        try {
+            todoRepository.delete(todo);
+        } catch (Exception exception) {
+            throw new TodoAPIException(HttpStatus.NOT_FOUND, "Can't find todo with id: " + id);
+        }
     }
 
     private TodoDto mapToDto(Todo todo) {
