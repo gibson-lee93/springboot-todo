@@ -6,6 +6,7 @@ import com.springboot.todo.payload.TodoResponse;
 import com.springboot.todo.repository.UserRepository;
 import com.springboot.todo.service.TodoService;
 import com.springboot.todo.utils.AppConstants;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -17,13 +18,11 @@ import java.util.Optional;
 @RequestMapping("/todos")
 public class TodoController {
 
+    @Autowired
     private TodoService todoService;
-    private UserRepository userRepository;
 
-    public TodoController(TodoService todoService, UserRepository userRepository) {
-        this.todoService = todoService;
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping
     public ResponseEntity<TodoDto> createTodo(
