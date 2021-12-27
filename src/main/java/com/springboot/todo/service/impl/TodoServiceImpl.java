@@ -21,14 +21,11 @@ import java.util.stream.Collectors;
 @Service
 public class TodoServiceImpl implements TodoService {
 
+    @Autowired
     private TodoRepository todoRepository;
-    private ModelMapper mapper;
 
     @Autowired
-    public TodoServiceImpl(TodoRepository todoRepository, ModelMapper mapper) {
-        this.todoRepository = todoRepository;
-        this.mapper = mapper;
-    }
+    private ModelMapper mapper;
 
     @Override
     public TodoDto createTodo(TodoDto todoDto, User user) {
